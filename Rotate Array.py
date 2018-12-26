@@ -85,7 +85,7 @@ class Solution:
         #     count+=1
         
         # return nums
-
+import time
 time1 = time.time()
 
 nums = [1,2,3,4,5,6]
