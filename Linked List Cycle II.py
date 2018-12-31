@@ -55,10 +55,10 @@ Consider the following linked list, where E is the cylce entry and X, the crossi
         In my solution, since fast starts at head.next, we need to move slow one step forward in the beginning of part 2
 """
 # Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 class Solution(object):   
     def detectCycle(self, head):
