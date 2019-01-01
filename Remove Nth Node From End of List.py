@@ -28,7 +28,7 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
-        # init
+        # init, use dummmy to handle the case: remove first node
         dummy = ListNode(-1)
         dummy.next = head
         slow, fast = dummy, dummy
