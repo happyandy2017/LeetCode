@@ -56,12 +56,27 @@ Can you solve it using O(1) (i.e. constant) memory?
  */
 """
 # Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
         
 class Solution(object):
+    def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        initNode = ListNode(None)
+        initNode.next = head
+        slow, fast = initNode, initNode
+        while fast and fast.next:
+            slow, fast = slow.next, fast.next.next
+            if slow == fast:
+                return True
+        return False
+        
+class Solution3(object):
     def hasCycle(self, head):
         """
         :type head: ListNode
