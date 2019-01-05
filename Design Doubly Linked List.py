@@ -24,14 +24,111 @@ All values will be in the range of [1, 1000].
 The number of operations will be in the range of [1, 1000].
 Please do not use the built-in LinkedList library.
 """
-
-# Definition for singly-linked list.
+# Definition for doubly-linked list.
 class Node(object):
     def __init__(self, val):
         self.val = val
-        self.prev = None
         self.next = None
+        self.pre = None
+
+class MyDoublyLinkedList:
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        # to store nodes in list, to accelerate searching
+        self.list = []
+    
+    def get(self, index):
+        """
+        Get the value of the index-th node in the linked list. If the index is invalid, return -1.
+        :type index: int
+        :rtype: int
+        """
+        if index<0 or index>=len(self.list):
+            return -1
+        return self.list[index].val
+        # try: return self.list[index]
+        # except: return -1
+    
+    def addAtHead(self, val):
+        """
+        Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
+        :type val: int
+        :rtype: void
+        """
+        node = Node(val)
+        size = len(self.list)
+        if size>0:
+            node.next =self.list[0]
+            self.list[0].pre = node
+        self.list[0:0] = [node]
+        #self.list[:0] = [val]
+
+    def addAtTail(self, val):
+        """
+        Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
+        :type val: int
+        :rtype: void
+        """
+        node = Node(val)
+        size = len(self.list)
+        if size>0:
+            # don't use self.list[-1:], it is a list, not a node
+            self.list[-1].next = node
+            node.pre = self.list[-1]
+        self.list[size:size] = [node]
+        # self.list.append(val)
         
+    def addAtIndex(self, index, val):
+        """
+        Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
+        :type index: int
+        :type val: int
+        :rtype: void
+        """
+        size = len(self.list)
+        if index<0 or index>size:
+            return
+        if index == 0:
+            self.addAtHead(val)
+        elif index == size:
+            self.addAtTail(val)
+        else:
+            node = Node(val)
+            self.list[index:index] = [node]
+            self.list[index-1].next = node
+            node.pre = self.list[index-1]
+
+            node.next = self.list[index+1]
+            self.list[index+1].pre = node
+        
+    def deleteAtIndex(self, index):
+        """
+        Delete the index-th node in the linked list, if the index is valid.
+        :type index: int
+        :rtype: void
+        """
+        self.size = len(self.list)
+        if index < 0 or index >= self.size:
+            return
+        if index-1>=0 and index+1<=self.size-1:
+            self.list[index-1].next = self.list[index+1]
+            self.list[index+1].pre = self.list[index-1]
+
+        self.list.pop(index)
+        # del(self.list[index])
+
+obj = MyDoublyLinkedList()
+obj.addAtHead(1)
+obj.addAtTail(3)
+obj.addAtIndex(1,2)
+
+param_1 = obj.get(1)
+obj.deleteAtIndex(1)
+param_1 = obj.get(1)
+
+'''        
 class MyDoublyLinkedList:            
     def __init__(self):
         """
@@ -149,6 +246,7 @@ class MyDoublyLinkedList:
         next.next.prev = pre
 
         self.size-=1
+'''
 # Your MyLinkedList object will be instantiated and called as such:
 # obj = MyLinkedList()
 # param_1 = obj.get(index)
