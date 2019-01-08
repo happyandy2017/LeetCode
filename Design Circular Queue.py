@@ -42,7 +42,7 @@ class MyCircularQueue(object):
         Initialize your data structure here. Set the size of the queue to be k.
         :type k: int
         """
-        self.array = [-1]*k
+        self.data = [-1 for i in range(k)] # [-1]*k
         self.head = -1
         self.tail = -1
         self.size = k
@@ -59,7 +59,7 @@ class MyCircularQueue(object):
         if self.isEmpty():
             self.head = 0
         self.tail = (self.tail+1) % self.size
-        self.array[self.tail] = value
+        self.data[self.tail] = value
         return True
 
     def deQueue(self):
@@ -83,7 +83,7 @@ class MyCircularQueue(object):
         """
         if self.isEmpty():
             return -1
-        return self.array[self.head]
+        return self.data[self.head]
 
     def Rear(self):
         """
@@ -92,7 +92,7 @@ class MyCircularQueue(object):
         """
         if self.isEmpty():
             return -1
-        return self.array[self.tail]
+        return self.data[self.tail]
 
     def isEmpty(self):
         """
