@@ -30,6 +30,28 @@ class Solution:
         """
         if not grid:
             return 0
+        # Iterate through each of the cell and if it is an island, do dfs to mark all adjacent islands, then increase the counter by 1.
+        result = 0
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] == '1':
+                    self.dfs(grid, i, j)                
+                    result +=1
+        return result
+    
+    def dfs(self, grid, i, j):
+        if (i in range(len(grid))) and (j in range(len(grid[i]))) and grid[i][j]=='1':
+            grid[i][j] = '#'
+            for (m, n) in zip((i+1, i-1, i, i), (j, j, j+1, j-1)):
+                self.dfs(grid, m, n)
+
+    def numIslands_2(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        if not grid:
+            return 0
         
         def sink(i, j):
             if (i in range(len(grid))) and (j in range(len(grid[i]))) and grid[i][j]=='1': # string '1'
