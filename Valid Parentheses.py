@@ -50,6 +50,6 @@ class Solution:
                 if is_paired(stack[-1], char): # last one is paired with new char
                     stack.pop()
                 else:
-                    return False
+                    return False # exit if not paired, to improve performance
                     
         return len(stack) == 0
