@@ -38,8 +38,9 @@ class Solution:
         :rtype: bool
         """
         def is_paired(l, r):
-            return (l=='(' and r==')') or (l=='[' and r==']') or (l=='{' and r=='}')
-        
+            # return (l=='(' and r==')') or (l=='[' and r==']') or (l=='{' and r=='}')
+            return l+r in ['()', '[]', '{}']
+            
         stack = []
         for char in s:
             if char in ['(', '[', '{']:
