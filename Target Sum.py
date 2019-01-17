@@ -30,17 +30,18 @@ class Solution(object):
         :rtype: int
         """
         # dynamic program
-        if not nums: # corner case
+        if not nums:
             return 0
-        # Pick a data structure(dictionary) dic: dic[i] = j denotes that with given target sum i, there are j ways reaching to it.
-        # init values before iteration
-        dict = {nums[0]:1, -nums[0]:1} if nums[0] != 0 else {0:2}
-        # Maintain a pointer (from left to right), and this will update dic dynamically:
-        for i in range(1, len(nums)):
-            tdict = {}
+        dict = {0:1}
+        for i in range(len(nums)):
+            # tdict = {}
+            import collections
+            tdict = collections.defaultdict(int)
             for sum in dict: # 把相同的sum key的merge起来
-                tdict[nums[i]+sum] = tdict.get(nums[i]+sum,0)+dict.get(sum,0)
-                tdict[-nums[i]+sum] = tdict.get(-nums[i]+sum,0)+dict.get(sum,0)
+                # tdict[nums[i]+sum] = tdict.get(nums[i]+sum,0)+dict.get(sum,0)
+                # tdict[-nums[i]+sum] = tdict.get(-nums[i]+sum,0)+dict.get(sum,0)
+                tdict[sum+nums[i]] += dict[sum]
+                tdict[sum-nums[i]] += dict[sum]
             dict = tdict
         return dict.get(S,0)
 
